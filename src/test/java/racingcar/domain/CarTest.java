@@ -19,7 +19,7 @@ class CarTest {
     }
 
     @Test
-    void move_랜덤값이_3_이하이면_정지한다() {
+    void move_이동_불가능한_Policy면_정지한다() {
         Car car = new Car("자동차");
         RandomValueMovePolicy movePolicy = () -> false;
 
@@ -29,7 +29,7 @@ class CarTest {
     }
 
     @Test
-    void move_랜덤값이_4_이상이면_전진한다() {
+    void move_이동_가능한_Policy면_전진한다() {
         Car car = new Car("자동차");
         RandomValueMovePolicy movePolicy = () -> true;
 
