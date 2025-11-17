@@ -1,10 +1,10 @@
 package racingcar.domain;
 
-public record RandomNumber(int value) {
+public record RandomValue(int value) {
     private static final int MIN_RANDOM_VALUE = 0;
     private static final int MAX_RANDOM_VALUE = 9;
 
-    public RandomNumber {
+    public RandomValue {
         validate(value);
     }
 
