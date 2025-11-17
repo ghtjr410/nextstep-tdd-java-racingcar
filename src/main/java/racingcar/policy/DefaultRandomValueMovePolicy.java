@@ -4,6 +4,7 @@ import racingcar.random.RandomValueGenerator;
 
 public class DefaultRandomValueMovePolicy implements RandomValueMovePolicy {
     private static final int FORWARD_THRESHOLD = 4;
+
     private final RandomValueGenerator randomValueGenerator;
 
     public DefaultRandomValueMovePolicy(RandomValueGenerator randomValueGenerator) {
