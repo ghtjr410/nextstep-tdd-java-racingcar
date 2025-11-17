@@ -1,41 +1,23 @@
 package racingcar.domain;
 
+import racingcar.policy.RandomValueMovePolicy;
+
 public class Car {
-    private int distance;
+    private final CarName name;
+    private CarDistance distance;
 
-    private static final int DEFAULT_DISTANCE = 0;
-    private static final int MIN_RANDOM_VALUE = 0;
-    private static final int MAX_RANDOM_VALUE = 9;
-    private static final int FORWARD_THRESHOLD = 4;
-    private static final int MOVE_DISTANCE = 1;
-
-    public Car() {
-        this.distance = DEFAULT_DISTANCE;
+    public Car(String name) {
+        this.name = new CarName(name);
+        this.distance = new CarDistance();
     }
 
-    public void move(int randomValue) {
-        validateRandomValue(randomValue);
-
-        if (shouldMoveForward(randomValue)) {
-            this.distance += MOVE_DISTANCE;
+    public void move(RandomValueMovePolicy movePolicy) {
+        if (movePolicy.moveable()) {
+            this.distance = distance.increase();
         }
     }
 
-    private void validateRandomValue(int randomValue) {
-        if (isOutOfRange(randomValue)) {
-            throw new IllegalArgumentException("랜덤 값은 0 이상 9 이하이어야 합니다.");
-        }
-    }
-
-    private boolean isOutOfRange(int randomValue) {
-        return randomValue < MIN_RANDOM_VALUE || randomValue > MAX_RANDOM_VALUE;
-    }
-
-    private boolean shouldMoveForward(int randomValue) {
-        return randomValue >= FORWARD_THRESHOLD;
-    }
-
-    public int getDistance() {
-        return this.distance;
+    public CarSnapshot toSnapshot() {
+        return new CarSnapshot(name, distance);
     }
 }
