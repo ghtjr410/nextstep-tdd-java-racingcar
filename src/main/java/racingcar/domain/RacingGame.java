@@ -1,27 +1,25 @@
 package racingcar.domain;
 
-import racingcar.policy.MovePolicy;
-import racingcar.random.RandomNumberGenerator;
+import racingcar.policy.RandomValueMovePolicy;
 
 public class RacingGame {
     private final Cars cars;
-    private final MovePolicy movePolicy;
+    private final RandomValueMovePolicy movePolicy;
 
-    public RacingGame(Cars cars, MovePolicy movePolicy) {
+    public RacingGame(Cars cars, RandomValueMovePolicy movePolicy) {
         this.cars = cars;
         this.movePolicy = movePolicy;
     }
 
-    public RaceHistory race(int roundCount, RandomNumberGenerator generator) {
-        Round round = new Round(roundCount);
-        return executeRounds(round, generator);
+    public RaceHistory race(int roundCount) {
+        return executeRounds(new Round(roundCount));
     }
 
-    private RaceHistory executeRounds(Round round, RandomNumberGenerator generator) {
+    private RaceHistory executeRounds(Round round) {
         RaceHistory raceHistory = new RaceHistory();
 
         while (!round.isFinished()) {
-            executeRound(generator);
+            executeRound();
             raceHistory.record(getRoundResult());
 
             round.next();
@@ -30,8 +28,8 @@ public class RacingGame {
         return raceHistory;
     }
 
-    private void executeRound(RandomNumberGenerator generator) {
-        cars.moveAll(generator, this.movePolicy);
+    private void executeRound() {
+        cars.moveAll(this.movePolicy);
     }
 
     private RoundResult getRoundResult() {

@@ -5,8 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
-import racingcar.policy.MovePolicy;
-import racingcar.random.RandomNumberGenerator;
+import racingcar.policy.RandomValueMovePolicy;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class CarTest {
@@ -22,10 +21,9 @@ class CarTest {
     @Test
     void move_랜덤값이_3_이하이면_정지한다() {
         Car car = new Car("자동차");
-        RandomNumberGenerator generator = () -> new RandomNumber(3);
-        MovePolicy movePolicy = (randomNumber) -> false;
+        RandomValueMovePolicy movePolicy = () -> false;
 
-        car.move(generator, movePolicy);
+        car.move(movePolicy);
 
         assertThat(car.toSnapshot().distance()).isZero();
     }
@@ -33,10 +31,9 @@ class CarTest {
     @Test
     void move_랜덤값이_4_이상이면_전진한다() {
         Car car = new Car("자동차");
-        RandomNumberGenerator generator = () -> new RandomNumber(4);
-        MovePolicy movePolicy = (randomNumber) -> true;
+        RandomValueMovePolicy movePolicy = () -> true;
 
-        car.move(generator, movePolicy);
+        car.move(movePolicy);
 
         assertThat(car.toSnapshot().distance()).isEqualTo(1);
     }

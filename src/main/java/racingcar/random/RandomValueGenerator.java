@@ -2,6 +2,6 @@ package racingcar.random;
 
 import racingcar.domain.RandomNumber;
 
-public interface RandomNumberGenerator {
+public interface RandomValueGenerator {
     RandomNumber generate();
 }

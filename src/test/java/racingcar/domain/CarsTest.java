@@ -6,8 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
-import racingcar.policy.MovePolicy;
-import racingcar.random.RandomNumberGenerator;
+import racingcar.policy.RandomValueMovePolicy;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class CarsTest {
@@ -36,10 +35,9 @@ class CarsTest {
     @Test
     void moveAll_모든_자동차에게_이동_메시지를_전달한다() {
         Cars cars = new Cars(List.of("자동차하나", "자동차둘", "자동차셋"));
-        RandomNumberGenerator generator = () -> new RandomNumber(4);
-        MovePolicy movePolicy = (randomNumber) -> true;
+        RandomValueMovePolicy movePolicy = () -> true;
 
-        cars.moveAll(generator, movePolicy);
+        cars.moveAll(movePolicy);
 
         assertThat(cars.toSnapshots()).hasSize(3);
     }
