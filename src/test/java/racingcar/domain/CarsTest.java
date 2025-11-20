@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
-import racingcar.policy.RandomValueMovePolicy;
+import racingcar.policy.MovePolicy;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class CarsTest {
@@ -35,7 +35,7 @@ class CarsTest {
     @Test
     void moveAll_모든_자동차에게_이동_메시지를_전달한다() {
         Cars cars = new Cars(List.of("자동차하나", "자동차둘", "자동차셋"));
-        RandomValueMovePolicy movePolicy = () -> true;
+        MovePolicy movePolicy = () -> true;
 
         cars.moveAll(movePolicy);
 

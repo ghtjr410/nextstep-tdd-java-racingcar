@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import racingcar.policy.RandomValueMovePolicy;
+import racingcar.policy.MovePolicy;
 
 public class Cars {
     private static final int MIN_CAR_COUNT = 1;
@@ -46,7 +46,7 @@ public class Cars {
         return cars;
     }
 
-    public void moveAll(RandomValueMovePolicy movePolicy) {
+    public void moveAll(MovePolicy movePolicy) {
         for (Car car : values) {
             car.move(movePolicy);
         }

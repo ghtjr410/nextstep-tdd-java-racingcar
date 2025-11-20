@@ -9,12 +9,12 @@ import racingcar.domain.RandomValue;
 import racingcar.random.RandomValueGenerator;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-class DefaultRandomValueMovePolicyTest {
+class RandomValueMovePolicyTest {
 
     @Test
     void moveable_랜덤값이_4_미만이면_이동_불가능() {
         RandomValueGenerator generator = () -> new RandomValue(3);
-        DefaultRandomValueMovePolicy policy = new DefaultRandomValueMovePolicy(generator);
+        RandomValueMovePolicy policy = new RandomValueMovePolicy(generator);
 
         assertThat(policy.moveable()).isFalse();
     }
@@ -22,7 +22,7 @@ class DefaultRandomValueMovePolicyTest {
     @Test
     void moveable_랜덤값이_4_이상이면_이동_가능() {
         RandomValueGenerator generator = () -> new RandomValue(4);
-        DefaultRandomValueMovePolicy policy = new DefaultRandomValueMovePolicy(generator);
+        RandomValueMovePolicy policy = new RandomValueMovePolicy(generator);
 
         assertThat(policy.moveable()).isTrue();
     }

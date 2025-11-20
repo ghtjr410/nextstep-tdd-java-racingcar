@@ -1,12 +1,12 @@
 package racingcar.domain;
 
-import racingcar.policy.RandomValueMovePolicy;
+import racingcar.policy.MovePolicy;
 
 public class RacingGame {
     private final Cars cars;
-    private final RandomValueMovePolicy movePolicy;
+    private final MovePolicy movePolicy;
 
-    public RacingGame(Cars cars, RandomValueMovePolicy movePolicy) {
+    public RacingGame(Cars cars, MovePolicy movePolicy) {
         this.cars = cars;
         this.movePolicy = movePolicy;
     }

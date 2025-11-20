@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
-import racingcar.policy.RandomValueMovePolicy;
+import racingcar.policy.MovePolicy;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class CarTest {
@@ -21,7 +21,7 @@ class CarTest {
     @Test
     void move_이동_불가능한_Policy면_정지한다() {
         Car car = new Car("자동차");
-        RandomValueMovePolicy movePolicy = () -> false;
+        MovePolicy movePolicy = () -> false;
 
         car.move(movePolicy);
 
@@ -31,7 +31,7 @@ class CarTest {
     @Test
     void move_이동_가능한_Policy면_전진한다() {
         Car car = new Car("자동차");
-        RandomValueMovePolicy movePolicy = () -> true;
+        MovePolicy movePolicy = () -> true;
 
         car.move(movePolicy);
 

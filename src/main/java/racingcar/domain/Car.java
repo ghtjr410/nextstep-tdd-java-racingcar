@@ -1,6 +1,6 @@
 package racingcar.domain;
 
-import racingcar.policy.RandomValueMovePolicy;
+import racingcar.policy.MovePolicy;
 
 public class Car {
     private final CarName name;
@@ -11,7 +11,7 @@ public class Car {
         this.distance = new CarDistance();
     }
 
-    public void move(RandomValueMovePolicy movePolicy) {
+    public void move(MovePolicy movePolicy) {
         if (movePolicy.moveable()) {
             this.distance = distance.increase();
         }
