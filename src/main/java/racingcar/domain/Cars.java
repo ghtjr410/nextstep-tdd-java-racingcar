@@ -40,4 +40,14 @@ public class Cars {
             car.move(condition);
         }
     }
+
+    public List<CarStatus> statuses() {
+        List<CarStatus> statuses = new ArrayList<>();
+
+        for (Car car : values) {
+            statuses.add(car.status());
+        }
+
+        return statuses;
+    }
 }
