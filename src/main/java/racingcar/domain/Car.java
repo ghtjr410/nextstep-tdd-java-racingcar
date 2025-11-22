@@ -19,7 +19,7 @@ public class Car {
         }
     }
 
-    public int getDistance() {
-        return distance.value();
+    public CarStatus status() {
+        return new CarStatus(name, distance);
     }
 }

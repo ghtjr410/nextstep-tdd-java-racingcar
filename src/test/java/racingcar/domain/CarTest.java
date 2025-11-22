@@ -15,12 +15,22 @@ class CarTest {
     }
 
     @Test
-    void move_이동조건부합_이동() {
+    void move_이동가능_전진() {
         MovableCondition condition = () -> true;
         Car car = new Car("자동차");
 
         car.move(condition);
 
-        assertThat(car.getDistance()).isEqualTo(1);
+        assertThat(car.status().distance()).isEqualTo(1);
+    }
+
+    @Test
+    void move_이동불가능_정지() {
+        MovableCondition condition = () -> false;
+        Car car = new Car("자동차");
+
+        car.move(condition);
+
+        assertThat(car.status().distance()).isEqualTo(0);
     }
 }
