@@ -34,4 +34,10 @@ public class Cars {
     private static String[] split(String input) {
         return input.split(",");
     }
+
+    public void moveAll(MovableCondition condition) {
+        for (Car car : values) {
+            car.move(condition);
+        }
+    }
 }
