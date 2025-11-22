@@ -6,8 +6,15 @@ import java.util.List;
 public class Cars {
     private final List<Car> values;
 
-    public Cars(List<Car> values) {
-        this.values = new ArrayList<>(values);
+    public Cars(List<Car> inputs) {
+        validateNotEmpty(inputs);
+        this.values = new ArrayList<>(inputs);
+    }
+
+    private void validateNotEmpty(List<Car> inputs) {
+        if (inputs == null || inputs.isEmpty()) {
+            throw new IllegalArgumentException("자동차는 1대 이상이어야 합니다.");
+        }
     }
 
     public Cars(String inputNames) {
