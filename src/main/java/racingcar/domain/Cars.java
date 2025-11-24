@@ -2,6 +2,7 @@ package racingcar.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import racingcar.utils.MovableCondition;
 
 public class Cars {
     private final List<Car> values;

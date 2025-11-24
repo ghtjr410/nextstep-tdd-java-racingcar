@@ -1,5 +1,7 @@
 package racingcar.domain;
 
+import racingcar.utils.MovableCondition;
+
 public class Car {
     private final CarName name;
     private CarDistance distance;

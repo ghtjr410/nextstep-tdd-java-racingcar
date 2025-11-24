@@ -1,4 +1,4 @@
-package racingcar.domain;
+package racingcar.utils;
 
 @FunctionalInterface
 public interface RandomValueGenerator {

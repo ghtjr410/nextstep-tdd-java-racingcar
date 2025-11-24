@@ -1,5 +1,7 @@
 package racingcar.domain;
 
+import racingcar.utils.MovableCondition;
+
 public class RacingGame {
     private final Cars cars;
     private final RacingRound round;

@@ -1,6 +1,7 @@
 package racingcar;
 
 import racingcar.domain.*;
+import racingcar.utils.RandomMovableCondition;
 import racingcar.view.InputView;
 import racingcar.view.ResultView;
 
