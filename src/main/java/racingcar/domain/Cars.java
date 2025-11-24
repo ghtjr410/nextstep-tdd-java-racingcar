@@ -50,4 +50,29 @@ public class Cars {
 
         return statuses;
     }
+
+    public Winners winners() {
+        return findWinners(findMaxDistance());
+    }
+
+    private Winners findWinners(int maxDistance) {
+        List<Car> winners = new ArrayList<>();
+
+        for (Car car : this.values) {
+
+            if (car.isSameDistance(maxDistance)) {
+                winners.add(car);
+            }
+        }
+
+        return new Winners(winners);
+    }
+
+    private int findMaxDistance() {
+        int max = 0;
+        for (Car car : this.values) {
+            max = car.maxDistance(max);
+        }
+        return max;
+    }
 }

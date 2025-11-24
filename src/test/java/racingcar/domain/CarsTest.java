@@ -24,4 +24,16 @@ class CarsTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("자동차는 1대 이상이어야 합니다.");
     }
+
+    @Test
+    void winners_우승자_반환() {
+        Car apple = new Car("사과", 0);
+        Car banana = new Car("바나나", 1);
+        Cars cars = new Cars(List.of(apple, banana));
+
+        Winners winners = cars.winners();
+
+        assertThat(winners.winners().size()).isEqualTo(1);
+        assertThat(winners.winners().contains(banana)).isTrue();
+    }
 }
