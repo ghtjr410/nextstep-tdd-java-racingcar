@@ -11,4 +11,12 @@ public record CarDistance(int value) {
     public CarDistance increase() {
         return new CarDistance(this.value + STEP);
     }
+
+    public int max(int that) {
+        return Math.max(this.value, that);
+    }
+
+    public boolean isSame(int that) {
+        return this.value == that;
+    }
 }
