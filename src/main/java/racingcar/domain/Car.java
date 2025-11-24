@@ -9,6 +9,10 @@ public class Car {
         this.distance = distance;
     }
 
+    public Car(String name, int distance) {
+        this(new CarName(name), new CarDistance(distance));
+    }
+
     public Car(String name) {
         this(new CarName(name), new CarDistance());
     }
@@ -21,5 +25,17 @@ public class Car {
 
     public CarStatus status() {
         return new CarStatus(name, distance);
+    }
+
+    public int maxDistance(int that) {
+        return distance.max(that);
+    }
+
+    public boolean isSameDistance(int that) {
+        return distance.isSame(that);
+    }
+
+    public String name() {
+        return name.value();
     }
 }
