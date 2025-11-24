@@ -52,20 +52,13 @@ public class Cars {
     }
 
     public Winners winners() {
-        return findWinners(findMaxDistance());
+        return new Winners(findWinners(findMaxDistance()));
     }
 
-    private Winners findWinners(int maxDistance) {
-        List<Car> winners = new ArrayList<>();
-
-        for (Car car : this.values) {
-
-            if (car.isSameDistance(maxDistance)) {
-                winners.add(car);
-            }
-        }
-
-        return new Winners(winners);
+    private List<Car> findWinners(int maxDistance) {
+        return this.values.stream()
+                .filter(car -> car.isSameDistance(maxDistance))
+                .toList();
     }
 
     private int findMaxDistance() {
