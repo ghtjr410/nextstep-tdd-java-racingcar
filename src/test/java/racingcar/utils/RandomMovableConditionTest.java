@@ -13,20 +13,12 @@ class RandomMovableConditionTest {
     @ParameterizedTest(name = "랜덤값: {0}")
     @ValueSource(ints = {4, 9})
     void isMovable_이동가능(int input) {
-        RandomValueGenerator generator = () -> input;
-
-        RandomMovableCondition condition = new RandomMovableCondition(generator);
-
-        assertThat(condition.isMovable()).isTrue();
+        assertThat(new RandomMovableCondition(() -> input).isMovable()).isTrue();
     }
 
     @ParameterizedTest(name = "랜덤값: {0}")
     @ValueSource(ints = {0, 3})
     void isMovable_이동불가능(int input) {
-        RandomValueGenerator generator = () -> input;
-
-        RandomMovableCondition condition = new RandomMovableCondition(generator);
-
-        assertThat(condition.isMovable()).isFalse();
+        assertThat(new RandomMovableCondition(() -> input).isMovable()).isFalse();
     }
 }
