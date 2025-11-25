@@ -9,14 +9,14 @@ public class RacingRound {
     private final int total;
     private int current;
 
+    public RacingRound(int total) {
+        this(total, START);
+    }
+
     public RacingRound(int total, int current) {
         validateTotal(total);
         this.total = total;
         this.current = current;
-    }
-
-    public RacingRound(int total) {
-        this(total, START);
     }
 
     private void validateTotal(int total) {

@@ -7,6 +7,10 @@ import racingcar.utils.MovableCondition;
 public class Cars {
     private final List<Car> values;
 
+    public Cars(String inputNames) {
+        this(createCars(inputNames));
+    }
+
     public Cars(List<Car> inputs) {
         validateNotEmpty(inputs);
         this.values = new ArrayList<>(inputs);
@@ -16,10 +20,6 @@ public class Cars {
         if (inputs == null || inputs.isEmpty()) {
             throw new IllegalArgumentException("자동차는 1대 이상이어야 합니다.");
         }
-    }
-
-    public Cars(String inputNames) {
-        this(createCars(inputNames));
     }
 
     private static List<Car> createCars(String inputNames) {

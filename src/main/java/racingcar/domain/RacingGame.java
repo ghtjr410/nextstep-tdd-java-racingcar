@@ -6,17 +6,17 @@ public class RacingGame {
     private final Cars cars;
     private final RacingRound round;
 
-    public RacingGame(Cars cars, RacingRound round) {
-        this.cars = cars;
-        this.round = round;
-    }
-
     public RacingGame(String inputNames, RacingRound round) {
         this(new Cars(inputNames), round);
     }
 
     public RacingGame(String inputNames, int tryNumber) {
         this(new Cars(inputNames), new RacingRound(tryNumber));
+    }
+
+    public RacingGame(Cars cars, RacingRound round) {
+        this.cars = cars;
+        this.round = round;
     }
 
     public void race(MovableCondition condition) {

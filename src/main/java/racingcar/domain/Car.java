@@ -7,17 +7,17 @@ public class Car {
     private final CarName name;
     private CarDistance distance;
 
-    public Car(CarName name, CarDistance distance) {
-        this.name = name;
-        this.distance = distance;
-    }
-
     public Car(String name, int distance) {
         this(new CarName(name), new CarDistance(distance));
     }
 
     public Car(String name) {
         this(new CarName(name), new CarDistance());
+    }
+
+    public Car(CarName name, CarDistance distance) {
+        this.name = name;
+        this.distance = distance;
     }
 
     public void move(MovableCondition condition) {
