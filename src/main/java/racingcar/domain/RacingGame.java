@@ -29,7 +29,7 @@ public class RacingGame {
     }
 
     public RaceResult result() {
-        return new RaceResult(cars.statuses());
+        return cars.status();
     }
 
     public Winners winners() {

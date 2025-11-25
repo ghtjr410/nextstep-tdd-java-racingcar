@@ -42,14 +42,14 @@ public class Cars {
         }
     }
 
-    public List<CarStatus> statuses() {
+    public RaceResult status() {
         List<CarStatus> statuses = new ArrayList<>();
 
         for (Car car : values) {
             statuses.add(car.status());
         }
 
-        return statuses;
+        return new RaceResult(statuses);
     }
 
     public Winners winners() {
