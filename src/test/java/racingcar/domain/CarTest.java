@@ -5,33 +5,36 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
-import racingcar.utils.MovableCondition;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class CarTest {
 
     @Test
-    void 생성_이름으로_생성성공() {
+    void 생성자_이름으로_생성성공() {
         assertThatCode(() -> new Car("자동차")).doesNotThrowAnyException();
     }
 
     @Test
     void move_이동가능_전진() {
-        MovableCondition condition = () -> true;
-        Car car = new Car("자동차");
+        Car car = new Car("자동차", 0);
 
-        car.move(condition);
+        car.move(() -> true);
 
-        assertThat(car.status().distance()).isEqualTo(1);
+        assertThat(car).isEqualTo(new Car("자동차", 1));
     }
 
     @Test
     void move_이동불가능_정지() {
-        MovableCondition condition = () -> false;
-        Car car = new Car("자동차");
+        Car car = new Car("자동차", 0);
 
-        car.move(condition);
+        car.move(() -> false);
 
-        assertThat(car.status().distance()).isEqualTo(0);
+        assertThat(car).isEqualTo(new Car("자동차", 0));
+    }
+
+    @Test
+    void status_현재상태반환() {
+
+        assertThat(new Car("자동차", 0).status()).isEqualTo(new CarStatus("자동차", 0));
     }
 }

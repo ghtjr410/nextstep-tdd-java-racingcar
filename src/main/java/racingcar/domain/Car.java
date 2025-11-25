@@ -1,5 +1,6 @@
 package racingcar.domain;
 
+import java.util.Objects;
 import racingcar.utils.MovableCondition;
 
 public class Car {
@@ -39,5 +40,16 @@ public class Car {
 
     public String name() {
         return name.value();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Car car)) return false;
+        return Objects.equals(name, car.name) && Objects.equals(distance, car.distance);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, distance);
     }
 }
