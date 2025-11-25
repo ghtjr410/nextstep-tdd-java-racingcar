@@ -1,7 +1,7 @@
 # 5단계 - 자동차 경주(추가 연습)
 ***
 ## 코드 리뷰
-> PR 링크:
+> PR 링크: [https://github.com/next-step/java-racingcar/pull/6233](https://github.com/next-step/java-racingcar/pull/6233)
 > 
 ## 나의 학습 목표
 ### 1. TDD 사이클을 끝까지 지킨다.
