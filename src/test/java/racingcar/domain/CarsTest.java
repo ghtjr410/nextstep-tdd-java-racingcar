@@ -31,9 +31,6 @@ class CarsTest {
         Car banana = new Car("바나나", 1);
         Cars cars = new Cars(List.of(apple, banana));
 
-        Winners winners = cars.winners();
-
-        assertThat(winners.winners().size()).isEqualTo(1);
-        assertThat(winners.winners().contains(banana)).isTrue();
+        assertThat(cars.winners()).isEqualTo(new Winners(List.of(new Car("바나나", 1))));
     }
 }

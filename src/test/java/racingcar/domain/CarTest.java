@@ -34,7 +34,6 @@ class CarTest {
 
     @Test
     void status_현재상태반환() {
-
         assertThat(new Car("자동차", 0).status()).isEqualTo(new CarStatus("자동차", 0));
     }
 }
