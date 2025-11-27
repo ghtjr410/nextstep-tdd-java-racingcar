@@ -2,7 +2,7 @@
 ***
 ## 코드 리뷰
 > PR 링크:
-> [https://github.com/next-step/java-racingcar/pull/6180](https://github.com/next-step/java-racingcar/pull/6180)
+> **[https://github.com/next-step/java-racingcar/pull/6180](https://github.com/next-step/java-racingcar/pull/6180)**
 ## 나의 학습 목표
 - `Red → Green → Refactor`에 따라 단계적으로 구현하며 테스트 주도 개발의 기본 흐름을 체득한다.
 - 메서드를 세밀하게 분리하고 책임을 명확히 하며, 작은 단위의 리팩터링을 반복적으로 수행하는 습관을 기른다.

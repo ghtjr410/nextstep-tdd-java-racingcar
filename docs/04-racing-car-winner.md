@@ -2,7 +2,7 @@
 ***
 ## 코드 리뷰
 > PR 링크:
-> 
+> **[https://github.com/next-step/java-racingcar/pull/6207](https://github.com/next-step/java-racingcar/pull/6207)**
 ## 나의 학습 목표
 - 3단계에서 설계한 객체를 최대한 유지하며 새로운 기능을 추가한다.
   - 실무에서 기존 레거시 코드가 있는 상태에서 새로운 기능을 추가하는 것과 같은 상황 연출

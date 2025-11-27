@@ -1,38 +1,42 @@
 package racingcar.domain;
 
-import racingcar.policy.RandomValueMovePolicy;
+import racingcar.utils.MovableCondition;
 
 public class RacingGame {
     private final Cars cars;
-    private final RandomValueMovePolicy movePolicy;
+    private final RacingRound round;
 
-    public RacingGame(Cars cars, RandomValueMovePolicy movePolicy) {
+    public RacingGame(String inputNames, RacingRound round) {
+        this(new Cars(inputNames), round);
+    }
+
+    public RacingGame(String inputNames, int tryNumber) {
+        this(new Cars(inputNames), new RacingRound(tryNumber));
+    }
+
+    public RacingGame(Cars cars, RacingRound round) {
         this.cars = cars;
-        this.movePolicy = movePolicy;
+        this.round = round;
     }
 
-    public RaceHistory race(int roundCount) {
-        return executeRounds(new Round(roundCount));
-    }
-
-    private RaceHistory executeRounds(Round round) {
-        RaceHistory raceHistory = new RaceHistory();
-
-        while (!round.isFinished()) {
-            executeRound();
-            raceHistory.record(getRoundResult());
-
-            round.next();
+    public void race(MovableCondition condition) {
+        if (isFinished()) {
+            throw new IllegalArgumentException("게임이 종료되었습니다.");
         }
 
-        return raceHistory;
+        cars.moveAll(condition);
+        round.next();
     }
 
-    private void executeRound() {
-        cars.moveAll(this.movePolicy);
+    public RaceResult result() {
+        return cars.status();
     }
 
-    private RoundResult getRoundResult() {
-        return new RoundResult(cars.toSnapshots());
+    public Winners winners() {
+        return cars.winners();
+    }
+
+    public boolean isFinished() {
+        return round.isFinished();
     }
 }

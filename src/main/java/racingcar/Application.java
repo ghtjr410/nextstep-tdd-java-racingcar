@@ -1,35 +1,26 @@
 package racingcar;
 
-import racingcar.domain.Cars;
-import racingcar.domain.RaceHistory;
-import racingcar.domain.RacingGame;
-import racingcar.policy.DefaultRandomValueMovePolicy;
-import racingcar.policy.RandomValueMovePolicy;
-import racingcar.random.RandomValueGenerator;
-import racingcar.random.SimpleRandomValueGenerator;
+import racingcar.domain.*;
+import racingcar.utils.RandomMovableCondition;
 import racingcar.view.InputView;
-import racingcar.view.RaceGameInput;
 import racingcar.view.ResultView;
 
 public class Application {
     public static void main(String[] args) {
-        RaceGameInput input = InputView.readRaceGameInput();
+        String carNames = InputView.getCarNames();
+        int tryNumber = InputView.getTryNumber();
 
-        RaceHistory history = executeRaceGame(input);
+        ResultView.printHeader();
 
-        ResultView.printRaceHistory(history);
-    }
+        RacingGame game = new RacingGame(carNames, tryNumber);
+        var condition = new RandomMovableCondition();
 
-    private static RaceHistory executeRaceGame(RaceGameInput input) {
-        Cars cars = new Cars(input.carNames());
+        while (!game.isFinished()) {
+            game.race(condition);
 
-        RacingGame game = new RacingGame(cars, createDefaultMovePolicy());
+            ResultView.printRaceResult(game.result());
+        }
 
-        return game.race(input.roundCount());
-    }
-
-    private static RandomValueMovePolicy createDefaultMovePolicy() {
-        RandomValueGenerator generator = new SimpleRandomValueGenerator();
-        return new DefaultRandomValueMovePolicy(generator);
+        ResultView.printWinners(game.winners());
     }
 }

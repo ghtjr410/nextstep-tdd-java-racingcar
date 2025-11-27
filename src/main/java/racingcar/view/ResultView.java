@@ -1,57 +1,28 @@
 package racingcar.view;
 
-import java.io.PrintStream;
-import racingcar.domain.CarSnapshot;
-import racingcar.domain.RaceHistory;
-import racingcar.domain.RoundResult;
+import racingcar.domain.CarStatus;
+import racingcar.domain.RaceResult;
+import racingcar.domain.Winners;
 
 public class ResultView {
-    private static final String POSITION_SYMBOL = "-";
     private static final String RESULT_HEADER = "실행 결과";
-    private static final String WINNER_SUFFIX = "가 최종 우승했습니다.";
-    private static final String NAME_DISTANCE_FORMAT = "%s : %s";
-    private static final PrintStream OUT = System.out;
 
-    private ResultView() {
-        throw new AssertionError("인스턴스화를 지원하지 않습니다.");
+    public static void printHeader() {
+        System.out.println(RESULT_HEADER);
     }
 
-    public static void printRaceHistory(RaceHistory raceHistory) {
-        printHeader();
-        printAllRounds(raceHistory);
-        printWinner(raceHistory);
-    }
-
-    private static void printHeader() {
-        println();
-        println(RESULT_HEADER);
-    }
-
-    private static void printAllRounds(RaceHistory raceHistory) {
-        for (RoundResult round : raceHistory.getRounds()) {
-            printRound(round);
-            println();
+    public static void printRaceResult(RaceResult result) {
+        for (CarStatus status : result.statuses()) {
+            printCarStatus(status);
         }
+        System.out.println();
     }
 
-    private static void printRound(RoundResult roundResult) {
-        for (CarSnapshot snapshot : roundResult.snapshots()) {
-            String carStatus = String.format(
-                    NAME_DISTANCE_FORMAT, snapshot.name(), POSITION_SYMBOL.repeat(Math.max(0, snapshot.distance())));
-            println(carStatus);
-        }
+    private static void printCarStatus(CarStatus status) {
+        System.out.println(status.formatForDisplay());
     }
 
-    private static void printWinner(RaceHistory raceHistory) {
-        String winners = String.join(", ", raceHistory.winners());
-        println(winners + WINNER_SUFFIX);
-    }
-
-    private static void println(String message) {
-        OUT.println(message);
-    }
-
-    private static void println() {
-        OUT.println();
+    public static void printWinners(Winners winners) {
+        System.out.println(winners.formatForDisplay());
     }
 }

@@ -5,44 +5,35 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
-import racingcar.policy.RandomValueMovePolicy;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class CarTest {
 
     @Test
-    void 생성자_정상적으로_생성되면_올바른_초기_상태() {
-        Car car = new Car("자동차");
-
-        assertThat(car.toSnapshot().name()).isEqualTo("자동차");
-        assertThat(car.toSnapshot().distance()).isZero();
+    void 생성자_이름으로_생성성공() {
+        assertThatCode(() -> new Car("자동차")).doesNotThrowAnyException();
     }
 
     @Test
-    void move_이동_불가능한_Policy면_정지한다() {
-        Car car = new Car("자동차");
-        RandomValueMovePolicy movePolicy = () -> false;
+    void move_이동가능_전진() {
+        Car car = new Car("자동차", 0);
 
-        car.move(movePolicy);
+        car.move(() -> true);
 
-        assertThat(car.toSnapshot().distance()).isZero();
+        assertThat(car).isEqualTo(new Car("자동차", 1));
     }
 
     @Test
-    void move_이동_가능한_Policy면_전진한다() {
-        Car car = new Car("자동차");
-        RandomValueMovePolicy movePolicy = () -> true;
+    void move_이동불가능_정지() {
+        Car car = new Car("자동차", 0);
 
-        car.move(movePolicy);
+        car.move(() -> false);
 
-        assertThat(car.toSnapshot().distance()).isEqualTo(1);
+        assertThat(car).isEqualTo(new Car("자동차", 0));
     }
 
     @Test
-    void toSnapshot_현재_상태를_스냅샷으로_변환한다() {
-        Car car = new Car("자동차");
-
-        assertThat(car.toSnapshot().name()).isEqualTo("자동차");
-        assertThat(car.toSnapshot().distance()).isEqualTo(0);
+    void status_현재상태반환() {
+        assertThat(new Car("자동차", 0).status()).isEqualTo(new CarStatus("자동차", 0));
     }
 }

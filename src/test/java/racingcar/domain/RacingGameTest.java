@@ -2,23 +2,21 @@ package racingcar.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.List;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
-import racingcar.policy.RandomValueMovePolicy;
+import racingcar.utils.RandomMovableCondition;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class RacingGameTest {
 
     @Test
-    void race_모든_자동차가_정상적으로_경주를_완료한다() {
-        Cars cars = new Cars(List.of("자동차하나", "자동차둘"));
-        RandomValueMovePolicy movePolicy = () -> true;
-        RacingGame game = new RacingGame(cars, movePolicy);
+    void race_게임_종료_후_실행_예외발생() {
+        RacingGame game = new RacingGame("사과,바나나", new RacingRound(1, 2));
+        RandomMovableCondition condition = new RandomMovableCondition();
 
-        RaceHistory history = game.race(2);
-
-        assertThat(history.winners()).containsExactlyInAnyOrder("자동차하나", "자동차둘");
+        assertThatThrownBy(() -> game.race(condition))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("게임이 종료되었습니다.");
     }
 }

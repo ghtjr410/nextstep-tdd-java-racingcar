@@ -2,7 +2,7 @@
 ***
 ## 코드 리뷰
 > PR 링크:
-> [https://github.com/next-step/java-racingcar/pull/6170](https://github.com/next-step/java-racingcar/pull/6170)
+> **[https://github.com/next-step/java-racingcar/pull/6170](https://github.com/next-step/java-racingcar/pull/6170)**
 ## 나의 학습 목표
 - 익숙한 Java API로 단위테스트를 작성하여 향후 좋은 습관을 위해 학습테스트를 실습해본다.
 ## String 클래스에 대한 학습 테스트

@@ -2,7 +2,7 @@
 ***
 ## 코드 리뷰
 > PR 링크:
-> [https://github.com/next-step/java-racingcar/pull/6191](https://github.com/next-step/java-racingcar/pull/6191)
+> **[https://github.com/next-step/java-racingcar/pull/6191](https://github.com/next-step/java-racingcar/pull/6191)**
 ## 나의 학습 목표
 - TDD 사이클(Red-Green-Refactor)을 준수하여 기능을 구현한다.
 - 책임 주도 설계 원칙에 따라 객체의 역할과 책임을 명확히 분리한다.

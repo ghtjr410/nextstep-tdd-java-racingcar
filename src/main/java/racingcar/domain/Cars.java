@@ -1,64 +1,72 @@
 package racingcar.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import racingcar.policy.RandomValueMovePolicy;
+import racingcar.utils.MovableCondition;
 
 public class Cars {
-    private static final int MIN_CAR_COUNT = 1;
-
     private final List<Car> values;
 
-    public Cars(List<String> names) {
-        validateCount(names.size());
-        validateUnique(names);
-
-        this.values = createCars(names);
+    public Cars(String inputNames) {
+        this(createCars(inputNames));
     }
 
-    private void validateCount(int count) {
-        if (isInvalidCount(count)) {
-            throw new IllegalArgumentException("자동차 대수는 1이상이어야 합니다.");
+    public Cars(List<Car> inputs) {
+        validateNotEmpty(inputs);
+        this.values = new ArrayList<>(inputs);
+    }
+
+    private void validateNotEmpty(List<Car> inputs) {
+        if (inputs == null || inputs.isEmpty()) {
+            throw new IllegalArgumentException("자동차는 1대 이상이어야 합니다.");
         }
     }
 
-    private boolean isInvalidCount(int count) {
-        return count < MIN_CAR_COUNT;
-    }
-
-    private void validateUnique(List<String> names) {
-        Set<String> uniqueNames = new HashSet<>(names);
-
-        if (names.size() != uniqueNames.size()) {
-            throw new IllegalArgumentException("자동차 이름은 중복될 수 없습니다.");
-        }
-    }
-
-    private List<Car> createCars(List<String> names) {
+    private static List<Car> createCars(String inputNames) {
         List<Car> cars = new ArrayList<>();
 
-        for (String name : names) {
+        for (String name : split(inputNames)) {
             cars.add(new Car(name));
         }
 
         return cars;
     }
 
-    public void moveAll(RandomValueMovePolicy movePolicy) {
+    private static String[] split(String input) {
+        return input.split(",");
+    }
+
+    public void moveAll(MovableCondition condition) {
         for (Car car : values) {
-            car.move(movePolicy);
+            car.move(condition);
         }
     }
 
-    public List<CarSnapshot> toSnapshots() {
-        List<CarSnapshot> snapshots = new ArrayList<>();
+    public RaceResult status() {
+        List<CarStatus> statuses = new ArrayList<>();
 
         for (Car car : values) {
-            snapshots.add(car.toSnapshot());
+            statuses.add(car.status());
         }
 
-        return snapshots;
+        return new RaceResult(statuses);
+    }
+
+    public Winners winners() {
+        return new Winners(findWinners(findMaxDistance()));
+    }
+
+    private List<Car> findWinners(int maxDistance) {
+        return this.values.stream()
+                .filter(car -> car.isSameDistance(maxDistance))
+                .toList();
+    }
+
+    private int findMaxDistance() {
+        int max = 0;
+        for (Car car : this.values) {
+            max = car.maxDistance(max);
+        }
+        return max;
     }
 }

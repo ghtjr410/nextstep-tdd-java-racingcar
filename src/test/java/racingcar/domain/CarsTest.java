@@ -6,39 +6,31 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
-import racingcar.policy.RandomValueMovePolicy;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class CarsTest {
 
     @Test
-    void 생성자_자동차_이름_목록대로_자동차가_생성된다() {
-        Cars cars = new Cars(List.of("자동차하나", "자동차둘"));
-
-        assertThat(cars.toSnapshots()).extracting(CarSnapshot::name).containsExactly("자동차하나", "자동차둘");
+    void 생성자_정상입력_생성성공() {
+        assertThatCode(() -> new Cars("일,이,삼")).doesNotThrowAnyException();
     }
 
-    @Test
-    void 생성자_자동차_이름_목록_크기가_1_미만이면_예외발생() {
-        assertThatThrownBy(() -> new Cars(List.of()))
+    @ParameterizedTest(name = "빈 값: {0}")
+    @NullAndEmptySource
+    void 생성자_빈값입력_예외발생(List<Car> inputs) {
+        assertThatThrownBy(() -> new Cars(inputs))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 대수는 1이상이어야 합니다.");
+                .hasMessage("자동차는 1대 이상이어야 합니다.");
     }
 
     @Test
-    void 생성자_자동차_이름_목록에_중복이_있다면_예외발생() {
-        assertThatThrownBy(() -> new Cars(List.of("중복", "중복")))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 중복될 수 없습니다.");
-    }
+    void winners_우승자_반환() {
+        Car apple = new Car("사과", 0);
+        Car banana = new Car("바나나", 1);
+        Cars cars = new Cars(List.of(apple, banana));
 
-    @Test
-    void moveAll_모든_자동차에게_이동_메시지를_전달한다() {
-        Cars cars = new Cars(List.of("자동차하나", "자동차둘", "자동차셋"));
-        RandomValueMovePolicy movePolicy = () -> true;
-
-        cars.moveAll(movePolicy);
-
-        assertThat(cars.toSnapshots()).hasSize(3);
+        assertThat(cars.winners()).isEqualTo(new Winners(List.of(new Car("바나나", 1))));
     }
 }
